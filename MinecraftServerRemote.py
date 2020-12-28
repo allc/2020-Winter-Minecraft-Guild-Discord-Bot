@@ -1,7 +1,7 @@
 import socket
 import struct
 import json
-from utils.minecraft import pack_varint, unpack_varint
+from utils.minecraft_server import pack_varint, unpack_varint
 
 class MinecraftServerRemote:
     def __init__(self, address: str, port: int):

@@ -4,7 +4,7 @@ import logging
 import settings
 from MinecraftServerRemote import MinecraftServerRemote
 from MinecraftServerDiscordBot import MinecraftServerDiscordBot
-import utils.minecraft as minecraft_utils
+from utils.minecraft_server import get_minecraft_server_address_port
 
 
 '''Setup logging.'''
@@ -17,7 +17,7 @@ logging.basicConfig(format=logging_format, level=logging.INFO, handlers=[logging
 logging.info('Logging started.')
 
 
-minecraft_server_remote = MinecraftServerRemote(*minecraft_utils.get_minecraft_server_address_port(settings.MINECRAFT_SERVER_ADDRESS, settings.MINECRAFT_SERVER_PORT))
+minecraft_server_remote = MinecraftServerRemote(*get_minecraft_server_address_port(settings.MINECRAFT_SERVER_ADDRESS, settings.MINECRAFT_SERVER_PORT))
 
 
 bot = MinecraftServerDiscordBot(minecraft_server_remote, command_prefix=settings.COMMAND_PREFIX)
