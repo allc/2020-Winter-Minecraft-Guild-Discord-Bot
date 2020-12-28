@@ -64,7 +64,6 @@ class MinecraftServerRemote:
             response = connection.recv(packet_length_remaining)
             response = response.decode('utf-8')
             response = json.loads(response)
-            print(response)
             return response
 
 
