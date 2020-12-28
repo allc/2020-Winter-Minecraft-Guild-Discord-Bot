@@ -1,0 +1,7 @@
+settings.py
+logs
+
+.env
+__pycache__
+*.code-workspace
+*.vscode
