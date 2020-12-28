@@ -17,7 +17,12 @@ class MinecraftServerDiscordBot(commands.Bot):
 
         self.update_activity_task = self.loop.create_task(self.update_activity())
 
-    
+
+    async def on_ready(self):
+        '''Print bot user information when ready'''
+        print('Logged in as {}'.format(self.user))
+
+
     async def update_activity(self):
         await self.wait_until_ready()
         while not self.is_closed():

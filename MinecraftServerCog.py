@@ -7,11 +7,6 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
         self.minecraft_server_remote = minecraft_server_remote
 
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        print('Logged in as {}'.format(self.bot.user))
-
-
     @commands.command(aliases=['m'], help='Shows the list of players who are currently online on the Minecraft server.')
     async def online(self, ctx):
         online_players = self.minecraft_server_remote.get_online_players()
