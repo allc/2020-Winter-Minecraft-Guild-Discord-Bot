@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import logging
 import settings
+from utils.discord_bot import send_to_channels
 class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
     def __init__(self, bot, minecraft_server_remote):
         self.bot = bot
@@ -24,7 +25,6 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
         If the Minecraft server became offline or back online again, sends an alert to configured channels
 
         '''
-        # TODO: Refactor send message to channels
         try:
             num_online_players = self.minecraft_server_remote.get_online_players_count()
         except ConnectionError:
@@ -33,28 +33,14 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
                 message = 'Minecraft server appears to be offline.'
                 print(message)
                 logging.warning(message)
-                for channel_id in settings.MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS:
-                    channel = self.bot.get_channel(channel_id)
-                    if channel:
-                        await channel.send(message)
-                    else:
-                        invalid_channel_id_message = f'Minecraft server offline alert channel {channel_id} appears to be invalid.'
-                        print(invalid_channel_id_message)
-                        logging.error(invalid_channel_id_message)
+                await send_to_channels(self.bot, settings.MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS, message)
             return
         if self.minecraft_server_offline:
             self.minecraft_server_offline = False
             log_message = 'Minecraft server is online.'
             print(log_message)
             logging.info(log_message)
-            for channel_id in settings.MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS:
-                    channel = self.bot.get_channel(channel_id)
-                    if channel:
-                        await channel.send('Minecraft server is back online :ok_hand:')
-                    else:
-                        invalid_channel_id_message = f'Minecraft server offline alert channel {channel_id} appears to be invalid.'
-                        print(invalid_channel_id_message)
-                        logging.error(invalid_channel_id_message)
+            await send_to_channels(self.bot, settings.MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS, 'Minecraft server is back online :ok_hand:')
         if num_online_players == 0:
             activity_content = 'with no one'
         else:
