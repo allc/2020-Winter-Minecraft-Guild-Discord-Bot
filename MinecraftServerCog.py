@@ -60,7 +60,7 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
         else:
             activity_content = f'with {num_online_players} online player' + ('s' if num_online_players > 1 else '')
         if activity_content != self.last_activity:
-            await self.change_presence(activity=discord.Game(name=activity_content))
+            await self.bot.change_presence(activity=discord.Game(name=activity_content))
             self.last_activity = activity_content
             logging.info(f'Updated activity to "{activity_content}".')
 
