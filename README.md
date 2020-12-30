@@ -6,8 +6,9 @@ The bot shows some information and status of the Minecraft server on Discord.
 
 ## Features
 
-- Reply with the list of current online players.
-- Shows the number of online players as the bot's activity on Discord.
+- Reply with the list of current online players
+- Shows the number of online players as the bot's activity on Discord
+- Sending message on Discord when Minecraft server became offline or back online again
 
 ## Bot Commands
 
