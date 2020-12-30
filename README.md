@@ -8,3 +8,10 @@ The bot shows some information and status of the Minecraft server on Discord.
 
 - Reply with the list of current online players.
 - Shows the number of online players as the bot's activity on Discord.
+
+## Bot Commands
+
+Each command is prefixed with `.`.
+
+- `help` shows help information
+- `online` (alias `m`) shows the list of current online players on the Minecraft server

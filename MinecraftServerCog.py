@@ -21,7 +21,7 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
     @tasks.loop(minutes=1)
     async def update_activity(self):
         '''Update bot activity with number of current online players every minute
-        If the Minecraft server became offline or back online again, sends an alert to configured channels.
+        If the Minecraft server became offline or back online again, sends an alert to configured channels
 
         '''
         # TODO: Refactor send message to channels
@@ -71,7 +71,7 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
         await self.bot.wait_until_ready()
 
 
-    @commands.command(aliases=['m'], help='Shows the list of players who are currently online on the Minecraft server.')
+    @commands.command(aliases=['m'], help='Shows the list of current online players on the Minecraft server')
     async def online(self, ctx):
         online_players = self.minecraft_server_remote.get_online_players()
         if len(online_players) == 0:
