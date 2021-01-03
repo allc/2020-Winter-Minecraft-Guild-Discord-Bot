@@ -33,6 +33,7 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
                 message = 'Minecraft server appears to be offline.'
                 print(message)
                 logging.warning(message)
+                await self.bot.change_presence(activity=discord.Game('The Game?'))
                 await send_to_channels(self.bot, settings.MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS, message)
             return
         if self.minecraft_server_offline:
@@ -59,7 +60,10 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
 
     @commands.command(aliases=['m'], help='Shows the list of current online players on the Minecraft server')
     async def online(self, ctx):
-        online_players = self.minecraft_server_remote.get_online_players()
+        try:
+            online_players = self.minecraft_server_remote.get_online_players()
+        except ConnectionError:
+            await ctx.send('Unable to connect to Minecraft server.')
         if len(online_players) == 0:
             response = 'No online players.'
         else:
