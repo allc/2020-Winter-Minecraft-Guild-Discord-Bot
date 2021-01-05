@@ -58,7 +58,7 @@ class MinecraftServerCog(commands.Cog, name='Minecraft Server'):
         await self.bot.wait_until_ready()
 
 
-    @commands.command(aliases=['m'], help='Shows the list of current online players on the Minecraft server')
+    @commands.command(aliases=['m'], brief='Shows the list of current online players on Minecraft server')
     async def online(self, ctx):
         try:
             online_players = self.minecraft_server_remote.get_online_players()
