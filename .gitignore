@@ -1,5 +1,6 @@
 settings.py
 logs
+*.sqlite3
 
 .env
 __pycache__

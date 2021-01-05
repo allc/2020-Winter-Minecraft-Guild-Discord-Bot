@@ -3,15 +3,19 @@ import json
 import base64
 
 
-def get_uuid(playername: str) -> str:
-    '''Get UUID with playername from Mojang API'''
+def get_uuid(playername: str) -> (str, str):
+    '''Get UUID with playername from Mojang API
+    
+    Returns:
+    (str, str):UUID and playername
+    '''
     payload = [playername]
     r = requests.post('https://api.mojang.com/profiles/minecraft', data=json.dumps(payload))
     r = r.json()
     if len(r) > 0:
-        return r[0]['id']
+        return (r[0]['id'], r[0]['name'])
     else:
-        raise Exception(f'Cannnot find UUID for {playername}')
+        raise Exception(f'Cannnot find UUID for player {playername}')
 
 
 def get_skin_url(uuid: str) -> (str, bool):
@@ -29,12 +33,3 @@ def get_skin_url(uuid: str) -> (str, bool):
     else:
         is_slim = False
     return skin['url'], is_slim
-
-
-def get_skin_url_from_playername(playername: str) -> (str, bool):
-    '''Get skin URL and style from Mojang API
-    
-    Returns:
-    (str, bool):Skin URL and if the player model has slim arms
-    '''
-    return get_skin_url(get_uuid(playername))
