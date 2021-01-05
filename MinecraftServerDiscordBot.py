@@ -3,6 +3,7 @@ from discord.ext import commands
 import asyncio
 import logging
 from MinecraftServerCog import MinecraftServerCog
+from MinecraftCog import MinecraftCog
 
 
 class MinecraftServerDiscordBot(commands.Bot):
@@ -12,6 +13,7 @@ class MinecraftServerDiscordBot(commands.Bot):
         self.minecraft_server_remote = minecraft_server_remote
 
         self.add_cog(MinecraftServerCog(self, self.minecraft_server_remote))
+        self.add_cog(MinecraftCog(self))
 
 
     async def on_ready(self):
