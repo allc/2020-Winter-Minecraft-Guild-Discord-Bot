@@ -15,7 +15,7 @@ class MinecraftCog(commands.Cog, name='Minecraft'):
         self.db_engine = create_engine('sqlite:///' + settings.DB_PATH)
 
 
-    @commands.command(brief='Shows player\'s Minecraft profile', usage='player [playername]')
+    @commands.command(brief='Shows player\'s Minecraft profile', usage='[playername]')
     async def player(self, ctx, playername):
         ''''''
         #TODO: Skin render
