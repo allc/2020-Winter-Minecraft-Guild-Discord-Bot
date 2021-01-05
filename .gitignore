@@ -1,6 +1,7 @@
 settings.py
-logs
 *.sqlite3
+logs
+skin_renders
 
 .env
 __pycache__
