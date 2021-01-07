@@ -25,7 +25,6 @@ class MinecraftCog(commands.Cog, name='Minecraft'):
         Gets data from database cache if available and not expired, otherwise gets data from Mojang API and update cache
 
         '''
-        #TODO: Skin render
         Session = sessionmaker(bind=self.db_engine)
         session = Session()
         is_refresh_required = True
@@ -61,7 +60,6 @@ class MinecraftCog(commands.Cog, name='Minecraft'):
                 player.skin_render = skin_render_filename
                 player.skin_url = skin_url
                 player.is_skin_slim = is_skin_slim
-                #player.skin_render
                 player.last_update = datetime.now()
                 session.add(player)
                 session.commit()

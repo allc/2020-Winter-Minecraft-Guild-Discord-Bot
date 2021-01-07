@@ -16,3 +16,4 @@ Each command is prefixed with `.`.
 
 - `help` shows help information
 - `online` (alias `m`) shows the list of current online players on the Minecraft server
+- `player [playername]` Shows player's Minecraft profile including playername, skin file URL and skin render
