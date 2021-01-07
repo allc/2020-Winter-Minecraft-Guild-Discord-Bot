@@ -1,22 +1,19 @@
 import discord
 from discord.ext import commands
 from utils.mojang import get_uuid, get_skin_url
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 import requests
 from PIL import Image, ImageDraw
 from io import BytesIO
 from datetime import datetime, timedelta
-import settings
 from models import Player
 
 
 class MinecraftCog(commands.Cog, name='Minecraft'):
-    def __init__(self, bot):
+    def __init__(self, bot, db_engine):
         self.bot = bot
-
-        self.db_engine = create_engine('sqlite:///' + settings.DB_PATH)
+        self.db_engine = db_engine
 
 
     @commands.command(brief='Shows player\'s Minecraft profile', usage='[playername]')
@@ -30,7 +27,7 @@ class MinecraftCog(commands.Cog, name='Minecraft'):
         is_refresh_required = True
         try:
             player = session.query(Player).filter(Player.playername==playername).one()
-            if player.last_update + timedelta(minutes=10) > datetime.now():
+            if player.last_update + timedelta(minutes=10) > datetime.utcnow():
                 is_refresh_required = False
                 playername = player.playername
                 skin_url = player.skin_url
@@ -60,7 +57,7 @@ class MinecraftCog(commands.Cog, name='Minecraft'):
                 player.skin_render = skin_render_filename
                 player.skin_url = skin_url
                 player.is_skin_slim = is_skin_slim
-                player.last_update = datetime.now()
+                player.last_update = datetime.utcnow()
                 session.add(player)
                 session.commit()
             skin_render = discord.File(f'./skin_renders/{player.skin_render}')
