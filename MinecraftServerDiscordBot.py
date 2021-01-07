@@ -4,6 +4,7 @@ import asyncio
 import logging
 from MinecraftServerCog import MinecraftServerCog
 from MinecraftCog import MinecraftCog
+from CurrencyCog import CurrencyCog
 
 
 class MinecraftServerDiscordBot(commands.Bot):
@@ -14,6 +15,7 @@ class MinecraftServerDiscordBot(commands.Bot):
 
         self.add_cog(MinecraftServerCog(self, self.minecraft_server_remote))
         self.add_cog(MinecraftCog(self))
+        self.add_cog(CurrencyCog(self))
 
 
     async def on_ready(self):
