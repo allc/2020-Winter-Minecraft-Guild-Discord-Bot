@@ -7,11 +7,6 @@ import settings
 Base = declarative_base()
 
 
-def u():
-    print('update')
-    return datetime.now()
-
-
 class Player(Base):
     __tablename__ = 'players'
 
@@ -21,7 +16,7 @@ class Player(Base):
     skin_url = Column(String)
     is_skin_slim = Column(Boolean)
     skin_render = Column(String)
-    last_update = Column(DateTime, default=datetime.now, onupdate=u)
+    last_update = Column(DateTime, default=datetime.now, onupdate=datetime.now)
 
 
     def __repr__(self):
