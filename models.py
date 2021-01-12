@@ -16,11 +16,20 @@ class Player(Base):
     skin_url = Column(String)
     is_skin_slim = Column(Boolean)
     skin_render = Column(String)
-    last_update = Column(DateTime, default=datetime.now, onupdate=datetime.now)
+    last_update = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
     def __repr__(self):
         return f'<Player(name={self.player_name})>'
+
+
+class CurrencyPlayer(Base):
+    __tablename__ = 'currency_player'
+
+    id = Column(Integer, primary_key=True)
+    discord_user_id = Column(Integer, unique=True)
+    balance = Column(Integer, default=0)
+    last_timely = Column(DateTime, default=datetime.fromtimestamp(0))
 
 
 if __name__ == '__main__':

@@ -18,7 +18,7 @@ class MinecraftServerDiscordBot(commands.Bot):
 
         self.add_cog(MinecraftServerCog(self, self.minecraft_server_remote))
         self.add_cog(MinecraftCog(self, self.db_engine))
-        self.add_cog(CurrencyCog(self))
+        self.add_cog(CurrencyCog(self, self.db_engine))
 
 
     async def on_ready(self):
