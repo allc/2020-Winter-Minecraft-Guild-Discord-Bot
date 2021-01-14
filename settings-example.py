@@ -2,7 +2,7 @@ import os
 
 
 '''Bot Configration'''
-DB_PATH = os.path.dirname(os.path.abspath(__file__)) + 'db.sqlite3'
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'db.sqlite3')
 COMMAND_PREFIX = '.'
 MINECRAFT_SERVER_OFFLINE_ALERT_CHANNEL_IDS = []
 
